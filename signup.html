@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<h2>Sign Up</h2>
+
+	<form id="login">
+		<label for="fname">Username:</label><br>
+		<input type="text" id="uname" name="uname" value=""><br>
+		<label for="lname">Password:</label><br>
+		<input type="password" id="pass" name="pass" value=""><br><br>
+        <label for="lname">Re-enter Password:</label><br>
+		<input type="password" id="pass2" name="pass2" value=""><br><br>
+        <label for="lname">Email:</label><br>
+		<input type="email" id="email" name="email" value=""><br><br>
+	</form>
+	<div id="failsignup"></div>
+	<button onclick="login()">Signup</button>
+
+
+
+</body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+<script>
+	function login() {
+		var uname = document.getElementById("uname");
+		var pass = document.getElementById("pass");
+        var pass2 = document.getElementById("pass2");
+        var email = document.getElementById("email");
+        
+       
+        
+		var json = { "username": uname.value, "password": pass.value, "password2": pass2.value, "email":email.value}
+
+		$.ajax({
+			type: "POST",
+			url: "/signup",
+			data: json,
+
+			success: function (data) {
+				console.log(data)
+				if(data=="2"){
+					document.getElementById("failsignup").innerHTML = "PASSWORDS ARE DIFFERENT"
+				}
+				else if(data=="1"){
+					document.getElementById("failsignup").innerHTML = "Username Already Taken"
+				}
+				else{
+					location.href = "http://localhost:3000/login";
+				}
+					
+				
+			}
+			
+			
+		}
+		)
+    }
+	
+</script>
