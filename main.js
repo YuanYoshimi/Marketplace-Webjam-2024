@@ -80,16 +80,45 @@ document.addEventListener("DOMContentLoaded", () => {
   closeModalButton.addEventListener("click", () => {
     modal.style.display = "none";
   });
-
-  // Clear Local Database
-  const clearDatabaseButton = document.getElementById("clear-database-button");
-  if (clearDatabaseButton) {
-    clearDatabaseButton.addEventListener("click", () => {
-      if (confirm("Are you sure you want to clear all stored items? This action cannot be undone.")) {
-        localStorage.clear();
-        alert("Local database cleared!");
-        window.location.reload();
-      }
+    // Chatbot Logic
+    const chatbotContainer = document.getElementById("chatbot-container");
+    const chatButton = document.getElementById("chat-button");
+    const chatbotInput = document.getElementById("chatbot-input");
+    const chatbotSend = document.getElementById("chatbot-send");
+    const chatbotMessages = document.getElementById("chatbot-messages");
+    const closeChatbot = document.querySelector(".close-chatbot");
+  
+    // Open/Close Chatbot
+    chatButton.addEventListener("click", () => {
+      chatbotContainer.classList.toggle("hidden");
     });
-  }
+  
+    closeChatbot.addEventListener("click", () => {
+      chatbotContainer.classList.add("hidden");
+    });
+  
+    // Send message
+    chatbotSend.addEventListener("click", sendMessage);
+    chatbotInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") sendMessage();
+    });
+  
+    function sendMessage() {
+      const message = chatbotInput.value.trim();
+      if (message) {
+        const userMessage = document.createElement("div");
+        userMessage.classList.add("user-message");
+        userMessage.textContent = message;
+        chatbotMessages.appendChild(userMessage);
+        chatbotInput.value = "";
+  
+        // Example bot reply
+        const botMessage = document.createElement("div");
+        botMessage.classList.add("bot-message");
+        botMessage.textContent = "Thank you for your message!";
+        chatbotMessages.appendChild(botMessage);
+  
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+      }
+    }
 });
