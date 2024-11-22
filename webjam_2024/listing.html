@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sell an Item</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Anteater Marketplace</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="listing.html">Sell Item</a>
+    </nav>
+  </header>
+  <main>
+    <div class="form-container">
+      <h2>Sell an Item</h2>
+      <form id="sell-form">
+        <!-- Item Name -->
+        <div class="form-group">
+          <label for="item-name">Item Name:</label>
+          <input type="text" id="item-name" name="item-name" placeholder="Enter the item name" required>
+        </div>
+
+        <!-- Price -->
+        <div class="form-group">
+          <label for="item-price">Price:</label>
+          <input type="number" id="item-price" name="item-price" placeholder="Enter the price" required>
+        </div>
+
+        <!-- Condition -->
+        <div class="form-group">
+          <label for="item-condition">Condition:</label>
+          <select id="item-condition" name="item-condition" required>
+            <option value="" disabled selected>Select the condition</option>
+            <option value="New">New</option>
+            <option value="Used (like new)">Used (like new)</option>
+            <option value="Used (good)">Used (good)</option>
+            <option value="Used (fair)">Used (fair)</option>
+            <option value="Refurbished">Refurbished</option>
+          </select>
+        </div>
+
+        <!-- Phone Number -->
+        <div class="form-group">
+          <label for="user-phone">Phone Number:</label>
+          <input type="tel" id="user-phone" name="user-phone" placeholder="Enter your phone number" pattern="[0-9]{10}" required>
+          <small>Format: 10 digits (no spaces or dashes)</small>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="user-email">Email:</label>
+          <input type="email" id="user-email" name="user-email" placeholder="Enter your email address" required>
+        </div>
+
+        <!-- Upload Image -->
+        <div class="form-group">
+          <label for="item-image">Upload Image:</label>
+          <input type="file" id="item-image" name="item-image" accept="image/png, image/jpeg, image/jpg" required>
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+          <label for="item-description">Description:</label>
+          <textarea id="item-description" name="item-description" rows="5" placeholder="Enter a brief description of the item" required></textarea>
+        </div>
+
+        <!-- Prettified Submit Button -->
+        <button type="submit" class="btn">Upload Item</button>
+        <p id="error-message" class="error-message" style="display: none;">Please fill out all fields correctly.</p>
+      </form>
+    </div>
+  </main>
+  <footer>
+    <p>© 2024 Anteater Marketplace</p>
+  </footer>
+  <script src="main.js"></script>
+</body>
+</html>
