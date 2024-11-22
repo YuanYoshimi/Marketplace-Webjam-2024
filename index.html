@@ -36,7 +36,24 @@
     </div>
   </div>
 
-  <script src="main.js"></script>
-  <button id="clear-button" class="btn">Clear Local Database</button>
+  <!-- Chatbot -->
+  <div id="chatbot-container" style="display: none;">
+    <div id="chatbot">
+      <div id="chatbot-header">
+        <h3>Chatbot</h3>
+        <span class="close-chatbot">&times;</span>
+      </div>
+      <div id="chatbot-messages">
+        <div class="bot-message">Hi! How can I help you today?</div>
+      </div>
+      <div id="chatbot-input">
+        <input type="text" id="chatbot-text" placeholder="Type your message...">
+        <button id="chatbot-send">Send</button>
+      </div>
+    </div>
+  </div>
+  <button id="chat-button">💬</button>
+
+  <script src="main.js" type="module"></script>
 </body>
 </html>
