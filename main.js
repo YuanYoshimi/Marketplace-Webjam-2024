@@ -1,65 +1,9 @@
-// Function to handle the sell form submission
-function handleSellForm() {
-  const sellForm = document.getElementById("sell-form");
-
-  if (sellForm) {
-    sellForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      // Get form input values
-      const name = document.getElementById("item-name").value;
-      const price = `$${document.getElementById("item-price").value}`;
-      const description = document.getElementById("item-description").value;
-      const imageInput = document.getElementById("item-image");
-
-      // Validate file input
-      if (imageInput.files.length === 0) {
-        document.getElementById("error-message").style.display = "block";
-        return;
-      }
-
-      // Convert the uploaded image to Base64
-      const imageFile = imageInput.files[0];
-      const image = await convertToBase64(imageFile);
-
-      // Create a new item object
-      const newItem = { name, price, image, description };
-
-      // Get existing items from localStorage or initialize an empty array
-      const items = JSON.parse(localStorage.getItem("items")) || [];
-
-      // Add the new item to the array
-      items.push(newItem);
-
-      // Save the updated array back to localStorage
-      localStorage.setItem("items", JSON.stringify(items));
-
-      // Redirect to the home page
-      window.location.href = "index.html";
-    });
-  }
-}
-
-// Function to convert an image file to Base64
-function convertToBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result); // Convert file to Base64
-    reader.onerror = (error) => reject(error);
-    reader.readAsDataURL(file); // Read file as data URL
-  });
-}
-
 // Function to load items from localStorage and display them on the homepage
 function loadItems() {
   const itemList = document.getElementById("item-list");
+  const items = JSON.parse(localStorage.getItem("items")) || []; // Get items from localStorage
 
-  if (!itemList) return; // Exit if the #item-list element is missing
-
-  // Get items from localStorage or initialize an empty array
-  const items = JSON.parse(localStorage.getItem("items")) || [];
-
-  // Clear the item list before adding new content
+  // Clear the item list
   itemList.innerHTML = "";
 
   // Check if there are items to display
@@ -68,27 +12,59 @@ function loadItems() {
     return;
   }
 
-  // Loop through items and display them in cards
-  items.forEach((item) => {
+  // Loop through items and create cards for each
+  items.forEach((item, index) => {
     const itemCard = document.createElement("div");
     itemCard.classList.add("item-card");
 
     itemCard.innerHTML = `
       <img src="${item.image}" alt="${item.name}">
       <h2>${item.name}</h2>
-      <p>${item.description}</p>
-      <p><strong>${item.price}</strong></p>
+      <p><strong>Price:</strong> ${item.price}</p>
+      <button class="details-button" data-index="${index}">More Details</button>
     `;
 
     itemList.appendChild(itemCard);
   });
+
+  // Add event listeners to "More Details" buttons
+  const detailButtons = document.querySelectorAll(".details-button");
+  detailButtons.forEach(button => {
+    button.addEventListener("click", (e) => {
+      const index = e.target.getAttribute("data-index");
+      showItemDetails(items[index]);
+    });
+  });
 }
 
-// Initialize the script based on the current page
+// Function to show item details in a modal
+function showItemDetails(item) {
+  const modal = document.getElementById("modal");
+  document.getElementById("modal-title").textContent = item.name;
+  document.getElementById("modal-image").src = item.image;
+  document.getElementById("modal-price").textContent = item.price;
+  document.getElementById("modal-description").textContent = item.description;
+  document.getElementById("modal-condition").textContent = item.condition;
+  document.getElementById("modal-phone").textContent = item.phone;
+  document.getElementById("modal-email").textContent = item.email;
+
+  modal.style.display = "block";
+
+  // Close the modal when the close button is clicked
+  const closeButton = document.querySelector(".close-button");
+  closeButton.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  // Close the modal when clicking outside the modal content
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+}
+
+// Initialize the script on the homepage
 if (document.getElementById("item-list")) {
-  loadItems(); // Load items on the home page
-}
-
-if (document.getElementById("sell-form")) {
-  handleSellForm(); // Attach the form handler on the sell page
+  loadItems();
 }
