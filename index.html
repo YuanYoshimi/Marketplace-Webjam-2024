@@ -8,22 +8,42 @@
 </head>
 <body>
   <header>
-    <h1>Anteater Marketplace</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="listing.html">Sell Item</a>
-    </nav>
-    <img src="mascot.png" alt="Anteater Mascot" class="header-mascot">
+    <div class="header-container">
+      <h1>Anteater Marketplace</h1>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="listing.html">Sell Item</a>
+      </nav>
+      <img src="mascot.png" alt="Anteater Mascot" class="mascot">
+    </div>
   </header>
+
   <main>
-    <input type="text" id="search-bar" placeholder="Search items...">
-    <div id="item-list"></div>
+    <div class="search-container">
+      <input type="text" placeholder="Search items..." id="search-bar">
+    </div>
+    <div id="item-list" class="item-list"></div>
   </main>
+
   <footer>
     <p>© 2024 Anteater Marketplace</p>
   </footer>
 
-  <!-- Modal for Item Details -->
+  <!-- Chatbot -->
+  <div id="chatbot-container">
+    <div class="chatbot-header">
+      <span>Chatbot</span>
+      <button class="close-chatbot">&times;</button>
+    </div>
+    <div id="chatbot-messages"></div>
+    <div class="chatbot-input-container">
+      <input id="chatbot-text" type="text" placeholder="Type your message...">
+      <button id="chatbot-send">💬</button>
+    </div>
+  </div>
+  <button id="chat-button">💬</button>
+
+  <!-- Modal -->
   <div id="modal" class="modal">
     <div class="modal-content">
       <span class="close-button">&times;</span>
@@ -36,24 +56,6 @@
     </div>
   </div>
 
-  <!-- Chatbot -->
-  <div id="chatbot-container" style="display: none;">
-    <div id="chatbot">
-      <div id="chatbot-header">
-        <h3>Chatbot</h3>
-        <span class="close-chatbot">&times;</span>
-      </div>
-      <div id="chatbot-messages">
-        <div class="bot-message">Hi! How can I help you today?</div>
-      </div>
-      <div id="chatbot-input">
-        <input type="text" id="chatbot-text" placeholder="Type your message...">
-        <button id="chatbot-send">Send</button>
-      </div>
-    </div>
-  </div>
-  <button id="chat-button">💬</button>
-
-  <script src="main.js" type="module"></script>
+  <script src="main.js"></script>
 </body>
 </html>

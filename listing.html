@@ -8,61 +8,58 @@
 </head>
 <body>
   <header>
-    <h1>Anteater Marketplace</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="listing.html">Sell Item</a>
-    </nav>
-    <img src="mascot.png" alt="Anteater Mascot" class="header-mascot">
+    <div class="header-container">
+      <h1>Anteater Marketplace</h1>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="listing.html">Sell Item</a>
+      </nav>
+      <img src="mascot.png" alt="Anteater Mascot" class="mascot">
+    </div>
   </header>
+
   <main>
     <div class="form-container">
       <h2>Sell an Item</h2>
-      <form id="sell-form">
-        <div class="form-group">
-          <label for="item-name">Item Name:</label>
-          <input type="text" id="item-name" name="item-name" placeholder="Enter the item name" required>
-        </div>
-        <div class="form-group">
-          <label for="item-price">Price:</label>
-          <input type="number" id="item-price" name="item-price" placeholder="Enter the price" required>
-        </div>
-        <div class="form-group">
-          <label for="item-condition">Condition:</label>
-          <select id="item-condition" name="item-condition" required>
-            <option value="" disabled selected>Select the condition</option>
-            <option value="New">New</option>
-            <option value="Used (like new)">Used (like new)</option>
-            <option value="Used (good)">Used (good)</option>
-            <option value="Used (fair)">Used (fair)</option>
-            <option value="Refurbished">Refurbished</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="user-phone">Phone Number:</label>
-          <input type="tel" id="user-phone" name="user-phone" placeholder="Enter your phone number" pattern="[0-9]{10}" required>
-          <small>Format: 10 digits (no spaces or dashes)</small>
-        </div>
-        <div class="form-group">
-          <label for="user-email">Email:</label>
-          <input type="email" id="user-email" name="user-email" placeholder="Enter your email address" required>
-        </div>
-        <div class="form-group">
-          <label for="item-image">Upload Image:</label>
-          <input type="file" id="item-image" name="item-image" accept="image/png, image/jpeg, image/jpg" required>
-        </div>
-        <div class="form-group">
-          <label for="item-description">Description:</label>
-          <textarea id="item-description" name="item-description" rows="5" placeholder="Enter a brief description of the item" required></textarea>
-        </div>
-        <button type="submit" class="btn">Upload Item</button>
-        <p id="error-message" class="error-message" style="display: none;">Please fill out all fields correctly.</p>
+      <form id="item-form">
+        <label for="item-name">Item Name:</label>
+        <input id="item-name" type="text" placeholder="Enter the item name">
+
+        <label for="price">Price:</label>
+        <input id="price" type="number" placeholder="Enter the price">
+
+        <label for="condition">Condition:</label>
+        <select id="condition">
+          <option value="" disabled selected>Select the condition</option>
+          <option value="New">New</option>
+          <option value="Used (like new)">Used (like new)</option>
+          <option value="Used (good)">Used (good)</option>
+          <option value="Used (fair)">Used (fair)</option>
+          <option value="Refurbished">Refurbished</option>
+        </select>
+
+        <label for="phone">Phone Number:</label>
+        <input id="phone" type="tel" placeholder="Enter your phone number">
+        <small>Format: 10 digits (no spaces or dashes)</small>
+
+        <label for="email">Email:</label>
+        <input id="email" type="email" placeholder="Enter your email address">
+
+        <label for="image">Upload Image:</label>
+        <input id="image" type="file" accept="image/*">
+
+        <label for="description">Description:</label>
+        <textarea id="description" placeholder="Enter a brief description of the item"></textarea>
+
+        <button type="submit" id="upload-button">Upload Item</button>
       </form>
     </div>
   </main>
+
   <footer>
     <p>© 2024 Anteater Marketplace</p>
   </footer>
+
   <script src="main.js"></script>
 </body>
 </html>
