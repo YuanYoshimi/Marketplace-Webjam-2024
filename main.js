@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Submit form handler
   const form = document.getElementById("item-form");
+  const modal = document.getElementById("modal");
+  const closeModalButton = document.querySelector(".close-button");
+
+  // Add an item
   if (form) {
     form.addEventListener("submit", (event) => {
       event.preventDefault();
@@ -12,25 +15,31 @@ document.addEventListener("DOMContentLoaded", () => {
       const email = document.getElementById("email").value;
       const description = document.getElementById("description").value;
       const imageInput = document.getElementById("image");
-      const image = imageInput.files.length > 0 ? URL.createObjectURL(imageInput.files[0]) : "";
 
-      if (!itemName || !price || !condition || !phone || !email || !description || !image) {
+      if (!itemName || !price || !condition || !phone || !email || !description || imageInput.files.length === 0) {
         alert("Please fill in all fields and upload an image.");
         return;
       }
 
-      const item = { name: itemName, price: `$${price}`, condition, phone, email, description, image };
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const image = e.target.result;
+        const item = { name: itemName, price: `$${price}`, condition, phone, email, description, image };
 
-      const items = JSON.parse(localStorage.getItem("marketplaceItems")) || [];
-      items.push(item);
-      localStorage.setItem("marketplaceItems", JSON.stringify(items));
+        const items = JSON.parse(localStorage.getItem("marketplaceItems")) || [];
+        items.push(item);
+        localStorage.setItem("marketplaceItems", JSON.stringify(items));
 
-      alert("Item uploaded successfully!");
-      form.reset();
+        alert("Item uploaded successfully!");
+        form.reset();
+        window.location.href = "index.html";
+      };
+
+      reader.readAsDataURL(imageInput.files[0]);
     });
   }
 
-  // Load items on home page
+  // Render items on home page
   const itemList = document.getElementById("item-list");
   if (itemList) {
     const items = JSON.parse(localStorage.getItem("marketplaceItems")) || [];
@@ -47,7 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
       )
       .join("");
 
-    // Add modal events
     document.querySelectorAll(".details-button").forEach((button) => {
       button.addEventListener("click", (event) => {
         const index = event.target.getAttribute("data-index");
@@ -57,10 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Modal logic
-  const modal = document.getElementById("modal");
-  const closeModalButton = document.querySelector(".close-button");
-
+  // Open modal with item details
   function openModal(item) {
     document.getElementById("modal-title").innerText = item.name;
     document.getElementById("modal-image").src = item.image;
@@ -75,4 +80,16 @@ document.addEventListener("DOMContentLoaded", () => {
   closeModalButton.addEventListener("click", () => {
     modal.style.display = "none";
   });
+
+  // Clear Local Database
+  const clearDatabaseButton = document.getElementById("clear-database-button");
+  if (clearDatabaseButton) {
+    clearDatabaseButton.addEventListener("click", () => {
+      if (confirm("Are you sure you want to clear all stored items? This action cannot be undone.")) {
+        localStorage.clear();
+        alert("Local database cleared!");
+        window.location.reload();
+      }
+    });
+  }
 });
