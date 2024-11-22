@@ -167,3 +167,25 @@ select:focus {
   transform: scale(0.98);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+/* Header Mascot Image */
+.header-mascot {
+  position: absolute;
+  top: 0px;
+  right: 1000px;
+  width: 160px; /* Adjust size as needed */
+  height: auto;
+  z-index: 100;
+}
+
+/* Header Layout */
+header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #007bff;
+  color: white;
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

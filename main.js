@@ -118,3 +118,19 @@ function convertToBase64(file) {
 // Initialize based on the current page
 if (document.getElementById("item-list")) loadItems();
 if (document.getElementById("sell-form")) handleSellForm();
+
+
+// Function to clear localStorage
+function clearDatabase() {
+  localStorage.clear(); // Clear all stored items
+  alert("Local database cleared!"); // Notify the user
+  window.location.reload(); // Refresh the page to reflect changes
+}
+
+// Attach the function to the button with the ID "clear-button"
+document.addEventListener("DOMContentLoaded", () => {
+  const clearButton = document.getElementById("clear-button");
+  if (clearButton) {
+    clearButton.addEventListener("click", clearDatabase);
+  }
+});
